@@ -9,7 +9,6 @@ const solution = async () => {
 		pairs.forEach((pair) => {
 			handlePair(pair);
 		});
-		// console.log(invalidIds);
 		console.log(invalidIds.reduce((sum, value) => sum + value));
 	} catch (err) {
 		console.error(err);
@@ -25,13 +24,6 @@ const handlePair = (pair) => {
 		const id = i.toString();
 		const maxLength = id.length / 2;
 
-		// const firstSlice = id.slice(0, maxLength);
-		// const secondSlice = id.slice(maxLength);
-
-		// if (firstSlice === secondSlice) {
-		// 	invalidIds.push(i);
-		// }
-
 		for (let j = 1; j <= maxLength; j++) {
 			const repeatedSlice = id.slice(0, j).repeat(id.length / j);
 			if (repeatedSlice === id) {
@@ -40,8 +32,6 @@ const handlePair = (pair) => {
 			}
 		}
 	}
-
-	// console.log(first, last);
 };
 
 solution();
