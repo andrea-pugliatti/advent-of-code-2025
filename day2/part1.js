@@ -1,0 +1,40 @@
+import fs from "node:fs/promises";
+
+const invalidIds = [];
+
+const solution = async () => {
+	try {
+		const data = await fs.readFile("./day2/test.txt", { encoding: "utf-8" });
+		const pairs = data.split(",");
+		pairs.forEach((pair) => {
+			handlePair(pair);
+		});
+		// console.log(invalidIds);
+		console.log(invalidIds.reduce((sum, value) => sum + value));
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+const handlePair = (pair) => {
+	const [firstId, lastId] = pair.split("-");
+	const first = Number(firstId);
+	const last = Number(lastId);
+
+	for (let i = first; i <= last; i++) {
+		const id = i.toString();
+
+		const maxLength = id.length / 2;
+
+		const firstSlice = id.slice(0, maxLength);
+		const secondSlice = id.slice(maxLength);
+
+		if (firstSlice === secondSlice) {
+			invalidIds.push(i);
+		}
+	}
+
+	// console.log(first, last);
+};
+
+solution();
